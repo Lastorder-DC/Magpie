@@ -65,14 +65,14 @@
 				<Button Padding="0"
 						Click="{x:Bind ViewModel.Launch}"
 						IsEnabled="{x:Bind ViewModel.IsProgramExist, Mode=OneWay}"
-						ToolTipService.ToolTip="启动">
+						ToolTipService.ToolTip="실행">
 					<Button.Content>
 						<FontIcon Glyph="&#xE768;" />
 					</Button.Content>
 				</Button>
 				<Button x:Name="MoreOptionsButton"
 						Padding="0"
-						ToolTipService.ToolTip="更多选项">
+						ToolTipService.ToolTip="더 많은 옵션">
 					<Button.Content>
 						<FontIcon Glyph="&#xE712;" />
 					</Button.Content>
@@ -81,14 +81,14 @@
 									ShouldConstrainToRootBounds="False">
 							<MenuFlyoutItem Click="{x:Bind ViewModel.OpenProgramLocation}"
 											IsEnabled="{x:Bind ViewModel.IsProgramExist, Mode=OneWay}"
-											Text="打开程序位置">
+											Text="프로그램 위치 열기">
 								<MenuFlyoutItem.Icon>
 									<FontIcon Glyph="&#xE8DA;" />
 								</MenuFlyoutItem.Icon>
 							</MenuFlyoutItem>
 							<MenuFlyoutSeparator />
 							<MenuFlyoutItem Click="RenameMenuItem_Click"
-											Text="重命名">
+											Text="이름 변경">
 								<MenuFlyoutItem.Icon>
 									<FontIcon Glyph="&#xE8AC;" />
 								</MenuFlyoutItem.Icon>
@@ -97,7 +97,7 @@
 											Opening="RenameFlyout_Opening"
 											Placement="Bottom">
 										<StackPanel Orientation="Vertical">
-											<TextBlock Text="重命名" />
+											<TextBlock Text="이름 변경" />
 											<TextBox x:Name="RenameTextBox"
 													 Width="280"
 													 Height="32"
@@ -107,7 +107,7 @@
 											<Button MinWidth="80"
 													HorizontalAlignment="Right"
 													Click="RenameConfirmButton_Click"
-													Content="确定"
+													Content="확인"
 													IsEnabled="{x:Bind ViewModel.IsRenameConfirmButtonEnabled, Mode=OneWay}"
 													Style="{StaticResource AccentButtonStyle}" />
 										</StackPanel>
@@ -115,7 +115,7 @@
 								</FlyoutBase.AttachedFlyout>
 							</MenuFlyoutItem>
 							<MenuFlyoutItem Click="ReorderMenuItem_Click"
-											Text="重新排序">
+											Text="재정렬">
 								<MenuFlyoutItem.Icon>
 									<FontIcon Glyph="&#xE8CB;" />
 								</MenuFlyoutItem.Icon>
@@ -123,7 +123,7 @@
 									<Flyout x:Name="ReorderFlyout"
 											Placement="Bottom">
 										<StackPanel Orientation="Vertical">
-											<TextBlock Text="重新排序" />
+											<TextBlock Text="재정렬" />
 											<Button Margin="0,15,0,5"
 													HorizontalAlignment="Center"
 													Click="{x:Bind ViewModel.MoveUp}"
@@ -134,7 +134,7 @@
 															  FontSize="15"
 															  Glyph="&#xE74A;" />
 													<TextBlock VerticalAlignment="Center"
-															   Text="上移" />
+															   Text="위로 이동" />
 												</StackPanel>
 											</Button>
 											<Button HorizontalAlignment="Center"
@@ -146,7 +146,7 @@
 															  FontSize="15"
 															  Glyph="&#xE74B;" />
 													<TextBlock VerticalAlignment="Center"
-															   Text="下移" />
+															   Text="아래로 이동" />
 												</StackPanel>
 											</Button>
 										</StackPanel>
@@ -154,7 +154,7 @@
 								</FlyoutBase.AttachedFlyout>
 							</MenuFlyoutItem>
 							<MenuFlyoutItem Click="DeleteMenuItem_Click"
-											Text="删除">
+											Text="삭제">
 								<MenuFlyoutItem.Icon>
 									<FontIcon Glyph="&#xE74D;" />
 								</MenuFlyoutItem.Icon>
@@ -163,7 +163,7 @@
 											Placement="Bottom">
 										<StackPanel Orientation="Vertical"
 													Spacing="15">
-											<TextBlock Text="确定删除此缩放配置？" />
+											<TextBlock Text="이 조정 구성을 삭제하시겠습니까?" />
 											<Button HorizontalAlignment="Right"
 													Click="DeleteButton_Click">
 												<Button.Resources>
@@ -189,7 +189,7 @@
 																  FontSize="15"
 																  Glyph="&#xE74D;" />
 														<TextBlock VerticalAlignment="Center"
-																   Text="删除" />
+																   Text="삭제" />
 													</StackPanel>
 												</Button.Content>
 											</Button>
@@ -206,7 +206,7 @@
 					Orientation="Vertical">
 			<local:SettingsGroup Title="常规"
 								 Margin="0,-25,0,0">
-				<local:SettingsCard Title="缩放模式">
+				<local:SettingsCard Title="줌 모드">
 					<local:SettingsCard.Icon>
 						<FontIcon Glyph="&#xE740;" />
 					</local:SettingsCard.Icon>
@@ -217,7 +217,7 @@
 								  Style="{StaticResource ComboBoxSettingStyle}" />
 					</local:SettingsCard.ActionContent>
 				</local:SettingsCard>
-				<local:SettingsCard Title="捕获模式">
+				<local:SettingsCard Title="캡처 모드">
 					<local:SettingsCard.Icon>
 						<FontIcon Glyph="&#xE9A6;" />
 					</local:SettingsCard.Icon>
@@ -233,7 +233,7 @@
 					</local:SettingsCard.ActionContent>
 				</local:SettingsCard>
 				<local:SettingsCard x:Name="Is3DGameModeSettingsCard"
-									Title="3D 游戏模式">
+									Title="3D 게임 모드">
 					<local:SettingsCard.Icon>
 						<FontIcon Glyph="&#xE7FC;" />
 					</local:SettingsCard.Icon>
@@ -242,7 +242,7 @@
 					</local:SettingsCard.ActionContent>
 				</local:SettingsCard>
 				<local:SettingsCard x:Name="MultiMonitorSettingsCard"
-									Title="多显示器">
+									Title="다중 모니터">
 					<local:SettingsCard.Icon>
 						<FontIcon Glyph="&#xf5a9;" />
 					</local:SettingsCard.Icon>
@@ -250,16 +250,16 @@
 						<ComboBox DropDownOpened="ComboBox_DropDownOpened"
 								  SelectedIndex="{x:Bind ViewModel.MultiMonitorUsage, Mode=TwoWay}"
 								  Style="{StaticResource ComboBoxSettingStyle}">
-							<x:String>使用距离源窗口最近的显示器</x:String>
-							<x:String>使用源窗口跨越的所有显示器</x:String>
-							<x:String>使用所有显示器</x:String>
+							<x:String>소스 창에 가장 가까운 모니터 사용</x:String>
+							<x:String>소스 창에 걸쳐 있는 모든 모니터 사용</x:String>
+							<x:String>모든 모니터 사용</x:String>
 						</ComboBox>
 					</local:SettingsCard.ActionContent>
 				</local:SettingsCard>
 			</local:SettingsGroup>
 			<local:SettingsGroup Title="性能">
 				<local:SettingsCard x:Name="GraphicsAdapterSettingsCard"
-									Title="显示卡">
+									Title="그래픽 카드">
 					<local:SettingsCard.Icon>
 						<FontIcon Glyph="&#xf211;" />
 					</local:SettingsCard.Icon>
@@ -271,7 +271,7 @@
 					</local:SettingsCard.ActionContent>
 				</local:SettingsCard>
 				<local:SettingsCard x:Name="ShowFPSSettingsCard"
-									Title="显示帧率">
+									Title="디스플레이 프레임 속도">
 					<local:SettingsCard.Icon>
 						<FontIcon Glyph="&#xEC4A;" />
 					</local:SettingsCard.Icon>
@@ -283,7 +283,7 @@
 							   HorizontalContentAlignment="Stretch"
 							   Style="{StaticResource SettingExpanderStyle}">
 					<muxc:Expander.Header>
-						<local:SettingsCard Title="垂直同步"
+						<local:SettingsCard Title="수직 동기"
 											Style="{StaticResource ExpanderHeaderSettingStyle}">
 							<local:SettingsCard.Icon>
 								<FontIcon Glyph="&#xF71C;" />
@@ -296,14 +296,14 @@
 					<muxc:Expander.Content>
 						<local:SettingsCard IsEnabled="{x:Bind ViewModel.IsVSync, Mode=OneWay}"
 											Style="{StaticResource ExpanderContentSettingStyle}">
-							<CheckBox Content="允许额外的延迟以提高性能"
+							<CheckBox Content="성능 향상을 위해 추가 대기 시간 허용"
 									  IsChecked="{x:Bind ViewModel.IsTripleBuffering, Mode=TwoWay}" />
 						</local:SettingsCard>
 					</muxc:Expander.Content>
 				</muxc:Expander>
 			</local:SettingsGroup>
-			<local:SettingsGroup Title="源窗口">
-				<local:SettingsCard Title="缩放时禁用窗口大小调整">
+			<local:SettingsGroup Title="소스 창">
+				<local:SettingsCard Title="확대/축소 시 창 크기 조정 비활성화">
 					<local:SettingsCard.Icon>
 						<FontIcon Glyph="&#xEE3F;" />
 					</local:SettingsCard.Icon>
@@ -311,7 +311,7 @@
 						<ToggleSwitch IsOn="{x:Bind ViewModel.IsDisableWindowResizing, Mode=TwoWay}" />
 					</local:SettingsCard.ActionContent>
 				</local:SettingsCard>
-				<local:SettingsCard Title="保留标题栏"
+				<local:SettingsCard Title="제목 표시줄 유지"
 									Description="仅在 Graphics Capture 和 Desktop Duplication 捕获模式下有效">
 					<local:SettingsCard.Icon>
 						<FontIcon Glyph="&#xE737;" />
@@ -325,7 +325,7 @@
 							   IsExpanded="{x:Bind ViewModel.IsCroppingEnabled, Mode=OneWay}"
 							   Style="{StaticResource SettingExpanderStyle}">
 					<muxc:Expander.Header>
-						<local:SettingsCard Title="自定义裁剪"
+						<local:SettingsCard Title="맞춤 자르기"
 											Style="{StaticResource ExpanderHeaderSettingStyle}">
 							<local:SettingsCard.Icon>
 								<FontIcon Glyph="&#xE7A8;" />
@@ -345,12 +345,12 @@
 									<Setter Property="Minimum" Value="0" />
 									<Setter Property="SmallChange" Value="1" />
 									<Setter Property="LargeChange" Value="10" />
-									<!--  修复有时取消禁用后文字依然为灰色的问题  -->
+									<!--  비활성화 후에도 텍스트가 여전히 회색으로 표시되는 문제 수정  -->
 									<Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
 								</Style>
 							</StackPanel.Resources>
 
-							<local:SettingsCard Title="左"
+							<local:SettingsCard Title="왼쪽"
 												IsEnabled="{x:Bind ViewModel.IsCroppingEnabled, Mode=OneWay}"
 												Style="{StaticResource ExpanderContentSettingStyle}">
 								<local:SettingsCard.ActionContent>
@@ -359,11 +359,11 @@
 										<muxc:NumberBox NumberFormatter="{x:Bind local:ScalingProfilePage.NumberFormatter, Mode=OneTime}"
 														Value="{x:Bind ViewModel.CroppingLeft, Mode=TwoWay}" />
 										<TextBlock VerticalAlignment="Center"
-												   Text="像素" />
+												   Text="픽셀" />
 									</StackPanel>
 								</local:SettingsCard.ActionContent>
 							</local:SettingsCard>
-							<local:SettingsCard Title="右"
+							<local:SettingsCard Title="오른쪽"
 												IsEnabled="{x:Bind ViewModel.IsCroppingEnabled, Mode=OneWay}"
 												Style="{StaticResource ExpanderContentSettingStyle}">
 								<local:SettingsCard.ActionContent>
@@ -372,11 +372,11 @@
 										<muxc:NumberBox NumberFormatter="{x:Bind local:ScalingProfilePage.NumberFormatter, Mode=OneTime}"
 														Value="{x:Bind ViewModel.CroppingRight, Mode=TwoWay}" />
 										<TextBlock VerticalAlignment="Center"
-												   Text="像素" />
+												   Text="픽셀" />
 									</StackPanel>
 								</local:SettingsCard.ActionContent>
 							</local:SettingsCard>
-							<local:SettingsCard Title="上"
+							<local:SettingsCard Title="위"
 												IsEnabled="{x:Bind ViewModel.IsCroppingEnabled, Mode=OneWay}"
 												Style="{StaticResource ExpanderContentSettingStyle}">
 								<local:SettingsCard.ActionContent>
@@ -385,11 +385,11 @@
 										<muxc:NumberBox NumberFormatter="{x:Bind local:ScalingProfilePage.NumberFormatter, Mode=OneTime}"
 														Value="{x:Bind ViewModel.CroppingTop, Mode=TwoWay}" />
 										<TextBlock VerticalAlignment="Center"
-												   Text="像素" />
+												   Text="픽셀" />
 									</StackPanel>
 								</local:SettingsCard.ActionContent>
 							</local:SettingsCard>
-							<local:SettingsCard Title="下"
+							<local:SettingsCard Title="아래"
 												IsEnabled="{x:Bind ViewModel.IsCroppingEnabled, Mode=OneWay}"
 												Style="{StaticResource ExpanderContentSettingStyle}">
 								<local:SettingsCard.ActionContent>
@@ -398,7 +398,7 @@
 										<muxc:NumberBox NumberFormatter="{x:Bind local:ScalingProfilePage.NumberFormatter, Mode=OneTime}"
 														Value="{x:Bind ViewModel.CroppingBottom, Mode=TwoWay}" />
 										<TextBlock VerticalAlignment="Center"
-												   Text="像素" />
+												   Text="픽셀" />
 									</StackPanel>
 								</local:SettingsCard.ActionContent>
 							</local:SettingsCard>
@@ -406,12 +406,12 @@
 					</muxc:Expander.Content>
 				</muxc:Expander>
 			</local:SettingsGroup>
-			<local:SettingsGroup Title="光标">
+			<local:SettingsGroup Title="커서">
 				<muxc:Expander HorizontalAlignment="Stretch"
 							   HorizontalContentAlignment="Stretch"
 							   Style="{StaticResource SettingExpanderStyle}">
 					<muxc:Expander.Header>
-						<local:SettingsCard Title="绘制光标"
+						<local:SettingsCard Title="커서 그리기"
 											Style="{StaticResource ExpanderHeaderSettingStyle}">
 							<local:SettingsCard.Icon>
 								<FontIcon Glyph="&#xE7C9;" />
@@ -423,7 +423,7 @@
 					</muxc:Expander.Header>
 					<muxc:Expander.Content>
 						<StackPanel>
-							<local:SettingsCard Title="缩放系数"
+							<local:SettingsCard Title="확대/축소 비율"
 												IsEnabled="{x:Bind ViewModel.IsDrawCursor, Mode=OneWay}"
 												Style="{StaticResource ExpanderContentSettingStyle}">
 								<local:SettingsCard.ActionContent>
@@ -444,12 +444,12 @@
 												  Style="{StaticResource ComboBoxSettingStyle}">
 											<x:String>0.5x</x:String>
 											<x:String>0.75x</x:String>
-											<x:String>无缩放</x:String>
+											<x:String>스케일링 없음</x:String>
 											<x:String>1.25x</x:String>
 											<x:String>1.5x</x:String>
 											<x:String>2x</x:String>
-											<x:String>和源窗口相同</x:String>
-											<x:String>自定义</x:String>
+											<x:String>소스 창과 동일</x:String>
+											<x:String>사용자 정의</x:String>
 										</ComboBox>
 										<muxc:NumberBox x:Name="CustomCursorScalingNumberBox"
 														Grid.Column="1"
@@ -478,15 +478,15 @@
 									<ComboBox DropDownOpened="ComboBox_DropDownOpened"
 											  SelectedIndex="{x:Bind ViewModel.CursorInterpolationMode, Mode=TwoWay}"
 											  Style="{StaticResource ComboBoxSettingStyle}">
-										<x:String>最近邻</x:String>
-										<x:String>双线性</x:String>
+										<x:String>가장 가까운 이웃</x:String>
+										<x:String>쌍선형</x:String>
 									</ComboBox>
 								</local:SettingsCard.ActionContent>
 							</local:SettingsCard>
 						</StackPanel>
 					</muxc:Expander.Content>
 				</muxc:Expander>
-				<local:SettingsCard Title="缩放时调整光标速度">
+				<local:SettingsCard Title="확대/축소 시 커서 속도 조정">
 					<local:SettingsCard.Icon>
 						<FontIcon x:Name="AdjustCursorSpeedFontIcon"
 								  Glyph="&#xE7C2;" />
@@ -496,8 +496,8 @@
 					</local:SettingsCard.ActionContent>
 				</local:SettingsCard>
 			</local:SettingsGroup>
-			<local:SettingsGroup Title="高级">
-				<local:SettingsCard Title="禁用 DirectFlip">
+			<local:SettingsGroup Title="고급">
+				<local:SettingsCard Title="DirectFlip 비활성화">
 					<local:SettingsCard.ActionContent>
 						<ToggleSwitch IsOn="{x:Bind ViewModel.IsDisableDirectFlip, Mode=TwoWay}" />
 					</local:SettingsCard.ActionContent>

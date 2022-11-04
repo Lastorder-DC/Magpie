@@ -6,17 +6,17 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
 	  mc:Ignorable="d">
-	<local:PageFrame Title="主页">
+	<local:PageFrame Title="홈">
 		<StackPanel HorizontalAlignment="Stretch"
 					Orientation="Vertical">
-			<local:SettingsGroup Title="激活"
+			<local:SettingsGroup Title="활성화"
 								 Margin="0,-25,0,0">
-				<local:SettingsCard Title="快捷键">
+				<local:SettingsCard Title="단축키">
 					<local:SettingsCard.Icon>
 						<FontIcon Glyph="&#xEDA7;" />
 					</local:SettingsCard.Icon>
 					<local:SettingsCard.ActionContent>
-						<local:ShortcutControl Title="激活快捷键">
+						<local:ShortcutControl Title="단축키 활성화">
 							<local:ShortcutControl.Action>
 								<local:HotkeyAction>Scale</local:HotkeyAction>
 							</local:ShortcutControl.Action>
@@ -27,8 +27,8 @@
 							   HorizontalContentAlignment="Stretch"
 							   Style="{StaticResource SettingExpanderStyle}">
 					<muxc:Expander.Header>
-						<local:SettingsCard Title="计时器"
-										   Description="计时结束后缩放前台窗口"
+						<local:SettingsCard Title="대기 시간"
+										   Description="타이머가 만료된 후 전경 창 확대"
 										   Style="{StaticResource ExpanderHeaderSettingStyle}">
 							<local:SettingsCard.Icon>
 								<FontIcon Glyph="&#xE916;" />
@@ -58,7 +58,7 @@
 						</local:SettingsCard>
 					</muxc:Expander.Header>
 					<muxc:Expander.Content>
-						<local:SettingsCard Title="倒计时时长"
+						<local:SettingsCard Title="카운트다운 시간"
 										   Style="{StaticResource ExpanderContentSettingStyle}">
 							<local:SettingsCard.ActionContent>
 								<Slider Width="150"
@@ -70,9 +70,9 @@
 						</local:SettingsCard>
 					</muxc:Expander.Content>
 				</muxc:Expander>
-				<local:SettingsCard Title="记忆缩放窗口"
+				<local:SettingsCard Title="메모리 줌 창"
 								   Margin="0,0,0,-2"
-								   Description="当该窗口回到前台时将自动缩放"
+								   Description="창이 전경으로 돌아오면 자동으로 확대/축소됩니다."
 								   Visibility="{x:Bind ViewModel.IsWndToRestore, Mode=OneWay, Converter={StaticResource NegativeVisibilityConverter}}">
 					<local:SettingsCard.Icon>
 						<FontIcon Glyph="&#xE944;" />
@@ -88,8 +88,8 @@
 							   Style="{StaticResource SettingExpanderStyle}"
 							   Visibility="{x:Bind ViewModel.IsWndToRestore, Mode=OneWay}">
 					<muxc:Expander.Header>
-						<local:SettingsCard Title="记忆缩放窗口"
-										   Description="当该窗口回到前台时将自动缩放"
+						<local:SettingsCard Title="메모리 줌 창"
+										   Description="창이 전경으로 돌아오면 자동으로 확대/축소됩니다."
 										   Style="{StaticResource ExpanderHeaderSettingStyle}">
 							<local:SettingsCard.Icon>
 								<FontIcon Glyph="&#xE944;" />
@@ -116,14 +116,14 @@
 					</muxc:Expander.Content>
 				</muxc:Expander>
 			</local:SettingsGroup>
-			<local:SettingsGroup Title="游戏内覆盖">
-				<local:SettingsCard Title="快捷键"
-								   Description="自定义打开和关闭游戏内覆盖的快捷键">
+			<local:SettingsGroup Title="게임 내 오버레이">
+				<local:SettingsCard Title="단축키"
+								   Description="게임 내 오버레이를 열고 닫기 위한 바로 가기 사용자 지정">
 					<local:SettingsCard.Icon>
 						<FontIcon Glyph="&#xEDA7;" />
 					</local:SettingsCard.Icon>
 					<local:SettingsCard.ActionContent>
-						<local:ShortcutControl Title="游戏内覆盖快捷键">
+						<local:ShortcutControl Title="게임 내 오버레이 단축키">
 							<local:ShortcutControl.Action>
 								<local:HotkeyAction>Overlay</local:HotkeyAction>
 							</local:ShortcutControl.Action>
@@ -131,19 +131,19 @@
 					</local:SettingsCard.ActionContent>
 				</local:SettingsCard>
 			</local:SettingsGroup>
-			<local:SettingsGroup Title="管理员模式">
+			<local:SettingsGroup Title="관리자 모드">
 				<muxc:Expander HorizontalAlignment="Stretch"
 							   HorizontalContentAlignment="Stretch"
 							   Style="{StaticResource SettingExpanderStyle}">
 					<muxc:Expander.Header>
-						<local:SettingsCard Title="管理员模式"
+						<local:SettingsCard Title="관리자 모드"
 										   Style="{StaticResource ExpanderHeaderSettingStyle}">
 							<local:SettingsCard.Icon>
 								<FontIcon Glyph="&#xE7EF;" />
 							</local:SettingsCard.Icon>
 							<local:SettingsCard.ActionContent>
 								<Button Click="{x:Bind ViewModel.RestartAsElevated}"
-										Content="以管理员身份重启 Magpie"
+										Content="Magpie를 관리자로 다시 시작"
 										IsEnabled="{x:Bind ViewModel.IsProcessElevated, Mode=OneTime, Converter={StaticResource NegationConverter}}" />
 							</local:SettingsCard.ActionContent>
 						</local:SettingsCard>
@@ -152,10 +152,10 @@
 						<StackPanel Orientation="Vertical">
 							<local:SettingsCard IsEnabled="{x:Bind ViewModel.IsProcessElevated, Mode=OneTime}"
 											   Style="{StaticResource ExpanderContentSettingStyle}">
-								<CheckBox Content="始终以管理员身份运行"
+								<CheckBox Content="항상 관리자 권한으로 실행"
 										  IsChecked="{x:Bind ViewModel.IsAlwaysRunAsElevated, Mode=TwoWay}" />
 							</local:SettingsCard>
-							<muxc:InfoBar Title="以管理员身份重启 Magpie 以更改此设置"
+							<muxc:InfoBar Title="이 설정을 변경하려면 Magpie를 관리자로 다시 시작하세요."
 										  IsClosable="False"
 										  IsOpen="{x:Bind ViewModel.IsProcessElevated, Mode=OneTime, Converter={StaticResource NegationConverter}}"
 										  Severity="Warning" />

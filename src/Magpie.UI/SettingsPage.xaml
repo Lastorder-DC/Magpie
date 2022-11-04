@@ -7,12 +7,12 @@
 	  xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
 	  mc:Ignorable="d">
 
-	<local:PageFrame Title="设置">
+	<local:PageFrame Title="설정">
 		<StackPanel HorizontalAlignment="Stretch"
 					Orientation="Vertical">
-			<local:SettingsGroup Title="外观和行为"
+			<local:SettingsGroup Title="외관 설정"
 								 Margin="0,-25,0,0">
-				<local:SettingsCard Title="主题">
+				<local:SettingsCard Title="테마">
 					<local:SettingsCard.Icon>
 						<FontIcon Glyph="&#xEF1F;" />
 					</local:SettingsCard.Icon>
@@ -20,9 +20,9 @@
 						<ComboBox DropDownOpened="ComboBox_DropDownOpened"
 								  SelectedIndex="{x:Bind ViewModel.Theme, Mode=TwoWay}"
 								  Style="{StaticResource ComboBoxSettingStyle}">
-							<x:String>浅色</x:String>
-							<x:String>深色</x:String>
-							<x:String>使用系统设置</x:String>
+							<x:String>라이트 모드</x:String>
+							<x:String>다크 모드</x:String>
+							<x:String>시스템 설정 사용</x:String>
 						</ComboBox>
 					</local:SettingsCard.ActionContent>
 				</local:SettingsCard>
@@ -30,7 +30,7 @@
 							   HorizontalContentAlignment="Stretch"
 							   Style="{StaticResource SettingExpanderStyle}">
 					<muxc:Expander.Header>
-						<local:SettingsCard Title="开机启动"
+						<local:SettingsCard Title="시작"
 										   Style="{StaticResource ExpanderHeaderSettingStyle}">
 							<local:SettingsCard.Icon>
 								<FontIcon Glyph="&#xE7B5;" />
@@ -44,18 +44,18 @@
 						<StackPanel>
 							<local:SettingsCard IsEnabled="{x:Bind ViewModel.IsMinimizeAtStartupEnabled, Mode=OneWay}"
 											   Style="{StaticResource ExpanderContentSettingStyle}">
-								<CheckBox Content="开机启动时最小化到系统托盘"
+								<CheckBox Content="시작 시 시스템 트레이로 최소화"
 										  IsChecked="{x:Bind ViewModel.IsMinimizeAtStartup, Mode=TwoWay}" />
 							</local:SettingsCard>
-							<muxc:InfoBar Title="启用“开机启动”和“常驻后台”以更改此设置"
+							<muxc:InfoBar Title="이 설정을 변경하려면 “시작” 및 “영구 배경”을 활성화하십시오."
 										  IsClosable="False"
 										  IsOpen="{x:Bind ViewModel.IsMinimizeAtStartupEnabled, Mode=OneWay, Converter={StaticResource NegationConverter}}"
 										  Severity="Warning" />
 						</StackPanel>
 					</muxc:Expander.Content>
 				</muxc:Expander>
-				<local:SettingsCard Title="常驻后台"
-								   Description="关闭主窗口时最小化到系统托盘">
+				<local:SettingsCard Title="영구 배경"
+								   Description="메인 창을 닫을 때 시스템 트레이로 최소화">
 					<local:SettingsCard.Icon>
 						<FontIcon Glyph="&#xE9F5;" />
 					</local:SettingsCard.Icon>
@@ -63,16 +63,16 @@
 						<ToggleSwitch IsOn="{x:Bind ViewModel.IsShowTrayIcon, Mode=TwoWay}" />
 					</local:SettingsCard.ActionContent>
 				</local:SettingsCard>
-				<local:SettingsCard Title="便携模式">
+				<local:SettingsCard Title="포터블 모드">
 					<local:SettingsCard.Icon>
 						<FontIcon Glyph="&#xE88E;" />
 					</local:SettingsCard.Icon>
 					<local:SettingsCard.Description>
 						<StackPanel Orientation="Vertical"
 									Spacing="2">
-							<TextBlock Text="更改配置文件的保存位置" />
+							<TextBlock Text="구성 파일이 저장되는 위치 변경" />
 							<HyperlinkButton Click="{x:Bind ViewModel.OpenConfigLocation}"
-											 Content="打开配置文件位置" />
+											 Content="구성 파일 위치 열기" />
 						</StackPanel>
 					</local:SettingsCard.Description>
 					<local:SettingsCard.ActionContent>
@@ -80,9 +80,9 @@
 					</local:SettingsCard.ActionContent>
 				</local:SettingsCard>
 			</local:SettingsGroup>
-			<local:SettingsGroup Title="高级">
-				<local:SettingsCard Title="模拟独占全屏"
-								   Description="使你在游戏时不受打扰">
+			<local:SettingsGroup Title="고급">
+				<local:SettingsCard Title="독점 전체 화면 에뮬레이션"
+								   Description="게임하는 동안 방해받지 않도록">
 					<local:SettingsCard.Icon>
 						<FontIcon Glyph="&#xec46;" />
 					</local:SettingsCard.Icon>
@@ -90,8 +90,8 @@
 						<ToggleSwitch IsOn="{x:Bind ViewModel.IsSimulateExclusiveFullscreen, Mode=TwoWay}" />
 					</local:SettingsCard.ActionContent>
 				</local:SettingsCard>
-				<local:SettingsCard Title="内联效果参数"
-								   Description="可以稍微提高性能，但每次修改参数都需重新编译该效果">
+				<local:SettingsCard Title="인라인 효과 매개변수"
+								   Description="성능을 약간 향상시킬 수 있지만 매개변수가 수정될 때마다 효과를 다시 컴파일해야 합니다.">
 					<local:SettingsCard.Icon>
 						<FontIcon Glyph="&#xE9E9;" />
 					</local:SettingsCard.Icon>
@@ -103,7 +103,7 @@
 							   HorizontalContentAlignment="Stretch"
 							   Style="{StaticResource SettingExpanderStyle}">
 					<muxc:Expander.Header>
-						<local:SettingsCard Title="开发者选项"
+						<local:SettingsCard Title="개발자 옵션"
 										   Style="{StaticResource ExpanderHeaderSettingStyle}">
 							<local:SettingsCard.Icon>
 								<FontIcon Glyph="&#xEC7A;" />
@@ -113,19 +113,19 @@
 					<muxc:Expander.Content>
 						<StackPanel>
 							<local:SettingsCard Style="{StaticResource ExpanderContentSettingStyle}">
-								<CheckBox Content="调试模式"
+								<CheckBox Content="디버그 모드"
 										  IsChecked="{x:Bind ViewModel.IsDebugMode, Mode=TwoWay}" />
 							</local:SettingsCard>
 							<local:SettingsCard Style="{StaticResource ExpanderContentSettingStyle}">
-								<CheckBox Content="禁用效果缓存"
+								<CheckBox Content="효과 캐싱 비활성화"
 										  IsChecked="{x:Bind ViewModel.IsDisableEffectCache, Mode=TwoWay}" />
 							</local:SettingsCard>
 							<local:SettingsCard Style="{StaticResource ExpanderContentSettingStyle}">
-								<CheckBox Content="解析效果时保存源代码"
+								<CheckBox Content="효과를 구문 분석하는 동안 소스 코드 저장"
 										  IsChecked="{x:Bind ViewModel.IsSaveEffectSources, Mode=TwoWay}" />
 							</local:SettingsCard>
 							<local:SettingsCard Style="{StaticResource ExpanderContentSettingStyle}">
-								<CheckBox Content="编译效果时将警告视为错误"
+								<CheckBox Content="효과를 컴파일할 때 경고를 오류로 처리"
 										  IsChecked="{x:Bind ViewModel.IsWarningsAreErrors, Mode=TwoWay}" />
 							</local:SettingsCard>
 						</StackPanel>

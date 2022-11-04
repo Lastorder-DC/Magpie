@@ -36,14 +36,14 @@ static std::wstring GetTaskName(std::wstring_view userName) {
 static com_ptr<ITaskService> CreateTaskService() {
 	com_ptr<ITaskService> taskService = try_create_instance<ITaskService>(CLSID_TaskScheduler);
 	if (!taskService) {
-		Logger::Get().Error("创建 TaskService 失败");
+		Logger::Get().Error("TaskService를 생성하지 못했습니다.");
 		return nullptr;
 	}
 
 	HRESULT hr = taskService->Connect(Win32Utils::Variant(), Win32Utils::Variant(),
 		Win32Utils::Variant(), Win32Utils::Variant());
 	if (FAILED(hr)) {
-		Logger::Get().ComError("ITaskService::Connect 失败", hr);
+		Logger::Get().ComError("ITaskService::Connect 실패", hr);
 		return nullptr;
 	}
 
@@ -56,11 +56,11 @@ static bool CreateAutoStartTask(bool runElevated, const wchar_t* arguments) {
 
 	// 检索用户域和用户名
 	if (!GetEnvironmentVariable(L"USERNAME", username, USERNAME_LEN)) {
-		Logger::Get().Win32Error("获取用户名失败");
+		Logger::Get().Win32Error("사용자 이름을 가져오지 못했습니다.");
 		return false;
 	}
 	if (!GetEnvironmentVariable(L"USERDOMAIN", usernameDomain, USERNAME_DOMAIN_LEN)) {
-		Logger::Get().Win32Error("获取用户域失败");
+		Logger::Get().Win32Error("사용자 도메인을 가져오지 못했습니다.");
 		return false;
 	}
 
@@ -79,13 +79,13 @@ static bool CreateAutoStartTask(bool runElevated, const wchar_t* arguments) {
 		com_ptr<ITaskFolder> rootFolder = NULL;
 		hr = taskService->GetFolder(Win32Utils::BStr(L"\\"), rootFolder.put());
 		if (FAILED(hr)) {
-			Logger::Get().ComError("获取根目录失败", hr);
+			Logger::Get().ComError("루트 디렉토리를 가져오지 못했습니다.", hr);
 			return false;
 		}
 
 		hr = rootFolder->CreateFolder(Win32Utils::BStr(L"\\Magpie"), Win32Utils::Variant(L""), taskFolder.put());
 		if (FAILED(hr)) {
-			Logger::Get().ComError("创建 Magpie 任务文件夹失败", hr);
+			Logger::Get().ComError("Magpie 작업 폴더를 만들지 못했습니다.", hr);
 			return false;
 		}
 	}
@@ -94,7 +94,7 @@ static bool CreateAutoStartTask(bool runElevated, const wchar_t* arguments) {
 	com_ptr<ITaskDefinition> task;
 	hr = taskService->NewTask(0, task.put());
 	if (FAILED(hr)) {
-		Logger::Get().ComError("创建 ITaskDefinition 失败", hr);
+		Logger::Get().ComError("ITaskDefinition을 생성하지 못했습니다.", hr);
 		return false;
 	}
 
@@ -103,13 +103,13 @@ static bool CreateAutoStartTask(bool runElevated, const wchar_t* arguments) {
 	com_ptr<IRegistrationInfo> regInfo;
 	hr = task->get_RegistrationInfo(regInfo.put());
 	if (FAILED(hr)) {
-		Logger::Get().ComError("获取 IRegistrationInfo 失败", hr);
+		Logger::Get().ComError("IRegistrationInfo를 가져오지 못했습니다.", hr);
 		return false;
 	}
 
 	hr = regInfo->put_Author(Win32Utils::BStr(usernameDomain));
 	if (FAILED(hr)) {
-		Logger::Get().ComError("IRegistrationInfo::put_Author 失败", hr);
+		Logger::Get().ComError("IRegistrationInfo::put_Author 실패", hr);
 		return false;
 	}
 
@@ -118,28 +118,28 @@ static bool CreateAutoStartTask(bool runElevated, const wchar_t* arguments) {
 	com_ptr<ITaskSettings> taskSettings;
 	hr = task->get_Settings(taskSettings.put());
 	if (FAILED(hr)) {
-		Logger::Get().ComError("获取 ITaskSettings 失败", hr);
+		Logger::Get().ComError("ITaskSettings를 가져오지 못했습니다.", hr);
 		return false;
 	}
 
 	hr = taskSettings->put_StartWhenAvailable(VARIANT_FALSE);
 	if (FAILED(hr)) {
-		Logger::Get().ComError("ITaskSettings::put_StartWhenAvailable 失败", hr);
+		Logger::Get().ComError("ITaskSettings::put_StartWhenAvailable 실패", hr);
 		return false;
 	}
 	hr = taskSettings->put_StopIfGoingOnBatteries(VARIANT_FALSE);
 	if (FAILED(hr)) {
-		Logger::Get().ComError("ITaskSettings::put_StopIfGoingOnBatteries 失败", hr);
+		Logger::Get().ComError("ITaskSettings::put_StopIfGoingOnBatteries 실패", hr);
 		return false;
 	}
 	hr = taskSettings->put_ExecutionTimeLimit(Win32Utils::BStr(L"PT0S")); //Unlimited
 	if (FAILED(hr)) {
-		Logger::Get().ComError("ITaskSettings::put_ExecutionTimeLimit 失败", hr);
+		Logger::Get().ComError("ITaskSettings::put_ExecutionTimeLimit 실패", hr);
 		return false;
 	}
 	hr = taskSettings->put_DisallowStartIfOnBatteries(VARIANT_FALSE);
 	if (FAILED(hr)) {
-		Logger::Get().ComError("ITaskSettings::put_DisallowStartIfOnBatteries 失败", hr);
+		Logger::Get().ComError("ITaskSettings::put_DisallowStartIfOnBatteries 실패", hr);
 		return false;
 	}
 

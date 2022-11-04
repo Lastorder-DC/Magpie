@@ -35,8 +35,8 @@ public:
 		_hwndMainChangedEvent.remove(token);
 	}
 
-	// 在由外部源引发的回调中可能返回 nullptr
-	// 这是因为用户关闭主窗口后 MainPage 不会立刻析构
+	// 사용자가 기본 창을 닫은 직후 MainPage가 소멸되지 않기 때문에
+	// 외부 소스에서 발생한 콜백에서 nullptr을 반환할 수 있습니다.
 	Magpie::UI::MainPage MainPage() const noexcept {
 		return _mainPage.get();
 	}

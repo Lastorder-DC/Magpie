@@ -186,7 +186,7 @@ bool AppSettings::Initialize() {
 	_UpdateConfigPath();
 
 	if (!Win32Utils::FileExists(_configPath.c_str())) {
-		logger.Info("不存在配置文件");
+		logger.Info("구성 파일이 존재하지 않습니다");
 		// 只有不存在配置文件时才生成默认缩放模式
 		_SetDefaultScalingModes();
 		_SetDefaultHotkeys();
@@ -195,13 +195,13 @@ bool AppSettings::Initialize() {
 
 	std::string configText;
 	if (!Win32Utils::ReadTextFile(_configPath.c_str(), configText)) {
-		MessageBox(NULL, L"无法读取配置文件", L"错误", MB_ICONERROR | MB_OK);
-		logger.Error("读取配置文件失败");
+		MessageBox(NULL, L"구성 파일을 읽을 수 없습니다", L"오류", MB_ICONERROR | MB_OK);
+		logger.Error("구성 파일을 읽지 못했습니다.");
 		return false;
 	}
 
 	if (configText.empty()) {
-		Logger::Get().Info("配置文件为空");
+		Logger::Get().Info("구성 파일이 비어 있습니다");
 		_SetDefaultHotkeys();
 		return true;
 	}
@@ -209,14 +209,14 @@ bool AppSettings::Initialize() {
 	rapidjson::Document doc;
 	doc.ParseInsitu(configText.data());
 	if (doc.HasParseError()) {
-		Logger::Get().Error(fmt::format("解析配置失败\n\t错误码：{}", (int)doc.GetParseError()));
-		MessageBox(NULL, L"配置文件不是合法的 JSON", L"错误", MB_ICONERROR | MB_OK);
+		Logger::Get().Error(fmt::format("구성을 구문 분석하지 못했습니다.\n\t에러 코드：{}", (int)doc.GetParseError()));
+		MessageBox(NULL, L"구성 파일이 유효한 JSON이 아닙니다.", L"오류", MB_ICONERROR | MB_OK);
 		return false;
 	}
 
 	if (!doc.IsObject()) {
-		Logger::Get().Error("配置文件根元素不是 Object");
-		MessageBox(NULL, L"解析配置文件失败", L"错误", MB_ICONERROR | MB_OK);
+		Logger::Get().Error("구성 파일 루트 요소가 개체가 아닙니다.");
+		MessageBox(NULL, L"구성 파일을 구문 분석하지 못했습니다.", L"오류", MB_ICONERROR | MB_OK);
 		return false;
 	}
 
@@ -227,16 +227,16 @@ bool AppSettings::Initialize() {
 	JsonHelper::ReadUInt(root, "version", settingsVersion);
 
 	if (settingsVersion > SETTINGS_VERSION) {
-		Logger::Get().Warn("未知的配置文件版本");
+		Logger::Get().Warn("알 수 없는 구성 파일 버전");
 		if (_isPortableMode) {
-			if (MessageBox(NULL, L"配置文件来自未来版本，可能无法正确解析。\n点击确定继续使用，点击取消退出。",
-				L"警告", MB_ICONWARNING | MB_OKCANCEL) != IDOK
+			if (MessageBox(NULL, L"구성 파일은 이후 버전에서 가져온 것이며 올바르게 구문 분석되지 않을 수 있습니다.\n계속하려면 확인을 클릭하고 종료하려면 취소를 클릭하십시오.",
+				L"오류", MB_ICONWARNING | MB_OKCANCEL) != IDOK
 			) {
 				return false;
 			}
 		} else {
-			if (MessageBox(NULL, L"全局配置文件来自未来版本，可能无法正确解析。\n点击确定继续使用，点击取消启用便携模式。",
-				L"警告", MB_ICONWARNING | MB_OKCANCEL) != IDOK
+			if (MessageBox(NULL, L"전역 구성 파일은 이후 버전에서 가져온 것이며 올바르게 구문 분석되지 않을 수 있습니다.\n계속하려면 확인을 클릭하고 포터블 모드를 활성화하려면 취소를 클릭하십시오.",
+				L"오류", MB_ICONWARNING | MB_OKCANCEL) != IDOK
 			) {
 				IsPortableMode(true);
 				_SetDefaultScalingModes();
@@ -254,7 +254,7 @@ bool AppSettings::Initialize() {
 
 bool AppSettings::Save() {
 	if (!Win32Utils::CreateDir(_configDir)) {
-		Logger::Get().Error("创建配置文件夹失败");
+		Logger::Get().Error("구성 폴더를 생성하지 못했습니다.");
 		return false;
 	}
 
@@ -281,7 +281,7 @@ bool AppSettings::Save() {
 			_isWindowMaximized = wp.showCmd == SW_MAXIMIZE;
 
 		} else {
-			Logger::Get().Win32Error("GetWindowPlacement 失败");
+			Logger::Get().Win32Error("GetWindowPlacement 오류");
 		}
 	}
 
@@ -358,7 +358,7 @@ bool AppSettings::Save() {
 	writer.EndObject();
 
 	if (!Win32Utils::WriteTextFile(_configPath.c_str(), { json.GetString(), json.GetLength() })) {
-		Logger::Get().Error("保存配置失败");
+		Logger::Get().Error("구성을 저장하지 못했습니다.");
 		return false;
 	}
 
@@ -376,7 +376,7 @@ void AppSettings::IsPortableMode(bool value) {
 		DeleteFile(StrUtils::ConcatW(_configDir, CommonSharedConstants::CONFIG_NAME).c_str());
 	}
 
-	Logger::Get().Info(value ? "已开启便携模式" : "已关闭便携模式");
+	Logger::Get().Info(value ? "포터블 모드가 켜져 있습니다." : "포터블 모드가 꺼져 있습니다.");
 
 	_isPortableMode = value;
 	_UpdateConfigPath();
@@ -399,7 +399,7 @@ void AppSettings::SetHotkey(HotkeyAction action, const Magpie::UI::HotkeySetting
 	}
 
 	_hotkeys[(size_t)action] = value;
-	Logger::Get().Info(fmt::format("热键 {} 已更改为 {}", HotkeyHelper::ToString(action), StrUtils::UTF16ToUTF8(value.ToString())));
+	Logger::Get().Info(fmt::format("단축키 {}가 {}로 변경됨", HotkeyHelper::ToString(action), StrUtils::UTF16ToUTF8(value.ToString())));
 	_hotkeyChangedEvent(action);
 }
 
@@ -659,7 +659,7 @@ void AppSettings::_UpdateConfigPath() noexcept {
 				CommonSharedConstants::CONFIG_DIR
 			);
 		} else {
-			Logger::Get().ComError("SHGetFolderPath 失败", hr);
+			Logger::Get().ComError("SHGetFolderPath 오류", hr);
 			_configDir = CommonSharedConstants::CONFIG_DIR;
 		}
 	}

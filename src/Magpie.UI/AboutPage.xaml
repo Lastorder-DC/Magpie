@@ -7,10 +7,10 @@
 	  xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
 	  mc:Ignorable="d">
 
-	<local:PageFrame Title="关于">
+	<local:PageFrame Title="정보">
 		<StackPanel HorizontalAlignment="Stretch"
 					Orientation="Vertical">
-			<local:SettingsGroup Title="版本"
+			<local:SettingsGroup Title="버전"
 								 Margin="0,-25,0,0">
 				<muxc:Expander HorizontalAlignment="Stretch"
 							   HorizontalContentAlignment="Stretch"
@@ -22,31 +22,31 @@
 								<FontIcon Glyph="&#xE895;" />
 							</local:SettingsCard.Icon>
 							<local:SettingsCard.Description>
-								<HyperlinkButton Content="发行说明"
+								<HyperlinkButton Content="릴리즈 노트"
 												 NavigateUri="https://github.com/Blinue/Magpie/releases" />
 							</local:SettingsCard.Description>
 							<local:SettingsCard.ActionContent>
 								<Button Click="{x:Bind ViewModel.CheckForUpdate}"
-										Content="检查更新" />
+										Content="업데이트 확인" />
 							</local:SettingsCard.ActionContent>
 						</local:SettingsCard>
 					</muxc:Expander.Header>
 					<muxc:Expander.Content>
 						<StackPanel Orientation="Vertical">
 							<local:SettingsCard Style="{StaticResource ExpanderContentSettingStyle}">
-								<CheckBox Content="自动下载更新" />
+								<CheckBox Content="자동으로 업데이트 다운로드" />
 							</local:SettingsCard>
 							<local:SettingsCard Style="{StaticResource ExpanderContentSettingStyle}">
-								<CheckBox Content="检查预览版更新" />
+								<CheckBox Content="미리보기 업데이트 확인" />
 							</local:SettingsCard>
 						</StackPanel>
 					</muxc:Expander.Content>
 				</muxc:Expander>
 			</local:SettingsGroup>
-			<local:SettingsGroup Title="反馈">
+			<local:SettingsGroup Title="피드백">
 				<Button Click="BugReportButton_Click"
 						Style="{StaticResource SettingsCardButtonStyle}">
-					<local:SettingsCard Title="报告错误"
+					<local:SettingsCard Title="오류 보고"
 										Style="{StaticResource ExpanderHeaderSettingStyle}">
 						<local:SettingsCard.Icon>
 							<FontIcon Glyph="&#xEBE8;" />
@@ -60,7 +60,7 @@
 				</Button>
 				<Button Click="FeatureRequestButton_Click"
 						Style="{StaticResource SettingsCardButtonStyle}">
-					<local:SettingsCard Title="建议功能"
+					<local:SettingsCard Title="기능 제안"
 										Style="{StaticResource ExpanderHeaderSettingStyle}">
 						<local:SettingsCard.Icon>
 							<FontIcon Glyph="&#xEA80;" />
@@ -74,7 +74,7 @@
 				</Button>
 				<Button Click="DiscussionsButton_Click"
 						Style="{StaticResource SettingsCardButtonStyle}">
-					<local:SettingsCard Title="问询和讨论"
+					<local:SettingsCard Title="문의 및 토론"
 										Style="{StaticResource ExpanderHeaderSettingStyle}">
 						<local:SettingsCard.Icon>
 							<FontIcon Glyph="&#xE8F2;" />
@@ -87,19 +87,19 @@
 					</local:SettingsCard>
 				</Button>
 			</local:SettingsGroup>
-			<local:SettingsGroup Title="其他链接">
+			<local:SettingsGroup Title="다른 링크">
 				<StackPanel Orientation="Horizontal">
 					<HyperlinkButton NavigateUri="https://github.com/Blinue/Magpie">
-						<TextBlock Text="项目主页" />
+						<TextBlock Text="프로젝트 홈페이지" />
 					</HyperlinkButton>
 					<HyperlinkButton NavigateUri="https://github.com/Blinue/Magpie/wiki/FAQ">
 						<TextBlock Text="FAQ" />
 					</HyperlinkButton>
 					<HyperlinkButton NavigateUri="https://github.com/Blinue/Magpie/blob/main/CONTRIBUTING.md">
-						<TextBlock Text="贡献指南" />
+						<TextBlock Text="기여 가이드라인" />
 					</HyperlinkButton>
 					<HyperlinkButton NavigateUri="https://github.com/Blinue/Magpie/blob/main/LICENSE">
-						<TextBlock Text="许可协议" />
+						<TextBlock Text="라이센스" />
 					</HyperlinkButton>
 				</StackPanel>
 			</local:SettingsGroup>

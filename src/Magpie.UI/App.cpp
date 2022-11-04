@@ -45,7 +45,7 @@ App::App() {
 
 	bool isWin11 = Win32Utils::GetOSBuild() >= 22000;
 	if (!isWin11) {
-		// Win10 中隐藏 DesktopWindowXamlSource 窗口
+		// Windows 10에서 DesktopWindowXamlSource 창 숨기기
 		CoreWindow coreWindow = CoreWindow::GetForCurrentThread();
 		if (coreWindow) {
 			HWND hwndDWXS;
@@ -54,10 +54,10 @@ App::App() {
 		}
 	}
 
-	// 根据操作系统版本设置样式
+	// OS 버전에 따른 스타일 설정
 	ResourceDictionary resource = Resources();
 
-	// 根据操作系统选择图标字体
+	// 운영 체제에 따라 아이콘 글꼴 선택
 	resource.Insert(
 		box_value(L"SymbolThemeFontFamily"),
 		FontFamily(isWin11 ? L"Segoe Fluent Icons" : L"Segoe MDL2 Assets")
@@ -122,11 +122,11 @@ void App::HwndMain(uint64_t value) noexcept {
 }
 
 void App::MainPage(Magpie::UI::MainPage const& mainPage) noexcept {
-	// 显示主窗口前等待 EffectsService 完成初始化
+	// 기본 창을 표시하기 전에 EffectsService가 초기화를 마칠 때까지 기다립니다.
 	EffectsService::Get().WaitForInitialize();
 
-	// 不存储对 MainPage 的强引用
-	// XAML Islands 内部保留着对 MainPage 的强引用，MainPage 的生命周期是无法预知的
+	// MainPage에 대한 강력한 참조를 저장하지 마십시오.
+	// MainPage에 대한 강력한 참조는 XAML Islands 내부에 유지되며 MainPage의 수명 주기는 예측할 수 없습니다.
 	_mainPage = weak_ref(mainPage);
 }
 
